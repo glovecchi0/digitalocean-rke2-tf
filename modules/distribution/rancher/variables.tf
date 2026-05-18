@@ -1,22 +1,23 @@
 variable "rancher_enabled" {
-  description = "Specifies whether Rancher should be installed on the Kubernetes cluster. Default is false."
+  description = "Specifies whether Rancher should be installed on the Kubernetes cluster. Default is 'false'."
   type        = bool
   default     = false
 }
 
 variable "rancher_version" {
-  description = "Specifies the Rancher Helm chart version to install. Default is null (latest version)."
+  description = "Specifies the Rancher Helm chart version to install. Default is null (latest version). Default is 'null'."
   type        = string
   default     = null
 }
 
 variable "rancher_hostname" {
-  description = "Specifies the hostname used to expose Rancher via Ingress."
+  description = "Specifies the hostname used to expose Rancher via Ingress. Default is 'null'."
   type        = string
+  default     = null
 }
 
 variable "rancher_bootstrap_password" {
-  description = "Specifies the bootstrap administrator password used during Rancher installation. Must be at least 12 characters when Rancher is enabled."
+  description = "Specifies the bootstrap administrator password used during Rancher installation. Must be at least 12 characters when Rancher is enabled. Default is 'null'."
   type        = string
   default     = null
   sensitive   = true
@@ -39,7 +40,7 @@ variable "rancher_tls_source" {
 }
 
 variable "kubeconfig_path" {
-  description = "Path to kubeconfig file used by kubectl. Default is null."
+  description = "Path to kubeconfig file used by kubectl. Default is 'null'."
   type        = string
   default     = null
 }

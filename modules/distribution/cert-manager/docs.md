@@ -24,8 +24,8 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_certmanager_version"></a> [certmanager\_version](#input\_certmanager\_version) | Cert-manager Helm chart version. If empty, latest version will be installed. Default is null (latest version). | `string` | `null` | no |
-| <a name="input_kubeconfig_path"></a> [kubeconfig\_path](#input\_kubeconfig\_path) | Path to kubeconfig file used by kubectl. Default is null. | `string` | `null` | no |
+| <a name="input_certmanager_version"></a> [certmanager\_version](#input\_certmanager\_version) | Cert-manager Helm chart version. If empty, latest version will be installed. Default is 'null' (latest version). | `string` | `null` | no |
+| <a name="input_kubeconfig_path"></a> [kubeconfig\_path](#input\_kubeconfig\_path) | Path to kubeconfig file used by kubectl. Default is 'null'. | `string` | `null` | no |
 
 ## Outputs
 

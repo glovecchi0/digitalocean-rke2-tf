@@ -150,3 +150,14 @@ module "rancher" {
   rancher_bootstrap_password = var.rancher_bootstrap_password
   kubeconfig_path            = local_file.kubeconfig_yaml.filename
 }
+
+module "suse_observability" {
+  source                            = "../../../modules/distribution/suse-observability"
+  depends_on                        = [module.rke2_first_server]
+  suse_observability_enabled        = var.suse_observability_enabled
+  suse_observability_version        = var.suse_observability_version
+  suse_observability_license        = var.suse_observability_license
+  suse_observability_admin_password = var.suse_observability_admin_password
+  suse_observability_host           = "observability.${module.rke2_first_server.instances_public_ip[0]}.sslip.io"
+  kubeconfig_path                   = local_file.kubeconfig_yaml.filename
+}

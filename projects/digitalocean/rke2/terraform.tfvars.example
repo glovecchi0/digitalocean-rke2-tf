@@ -60,3 +60,15 @@ rancher_bootstrap_password = null
 
 ## -- Specifies the TLS certificate source used by Rancher.
 rancher_tls_source = "letsEncrypt"
+
+## -- Specifies whether SUSE Observability should be installed on the Kubernetes cluster.
+suse_observability_enabled = false
+
+## -- Specifies the SUSE Observability Helm chart version to install.
+suse_observability_version = null
+
+## -- Specifies the SUSE Observability license key required for installation.
+suse_observability_license = null
+
+## -- Specifies the SUSE Observability administrator password used during installation. Must be at least 12 characters when enabled.
+suse_observability_admin_password = null

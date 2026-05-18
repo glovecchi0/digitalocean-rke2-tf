@@ -34,13 +34,13 @@ variable "region" {
 }
 
 variable "do_ssh_key_id" {
-  description = "Existing SSH key ID to use. If null, module will use or create one."
+  description = "Existing SSH key ID to use. If null, module will use or create one. Default is 'null'."
   type        = string
   default     = null
 }
 
 variable "instance_count" {
-  description = "Specifies the number of Droplets (nodes) to create for the RKE2 cluster. This value defines the total cluster size, including the first server node, additional server nodes (if count <= 3), and worker nodes (if count > 3). Default is 1."
+  description = "Specifies the number of Droplets (nodes) to create for the RKE2 cluster. This value defines the total cluster size, including the first server node, additional server nodes (if count <= 3), and worker nodes (if count > 3). Default is '1'."
   type        = number
   default     = 1
   validation {
@@ -122,31 +122,31 @@ variable "rke2_ingress" {
 }
 
 variable "longhorn_enabled" {
-  description = "Specifies whether Longhorn should be installed on the Kubernetes cluster. Default is false."
+  description = "Specifies whether Longhorn should be installed on the Kubernetes cluster. Default is 'false'."
   type        = bool
   default     = false
 }
 
 variable "longhorn_version" {
-  description = "Specifies the Longhorn Helm chart version to install. Default is null (latest version)."
+  description = "Specifies the Longhorn Helm chart version to install. Default is 'null' (latest version)."
   type        = string
   default     = null
 }
 
 variable "rancher_enabled" {
-  description = "Specifies whether Rancher should be installed on the Kubernetes cluster. Default is false."
+  description = "Specifies whether Rancher should be installed on the Kubernetes cluster. Default is 'false'."
   type        = bool
   default     = false
 }
 
 variable "rancher_version" {
-  description = "Specifies the Rancher Helm chart version to install. Default is null (latest version)."
+  description = "Specifies the Rancher Helm chart version to install. Default is 'null' (latest version)."
   type        = string
   default     = null
 }
 
 variable "rancher_bootstrap_password" {
-  description = "Specifies the bootstrap administrator password used during Rancher installation. Must be at least 12 characters when Rancher is enabled."
+  description = "Specifies the bootstrap administrator password used during Rancher installation. Must be at least 12 characters when Rancher is enabled. Default is 'null'."
   type        = string
   default     = null
   sensitive   = true
@@ -166,4 +166,50 @@ variable "rancher_tls_source" {
   description = "Specifies the TLS certificate source used by Rancher. Default is 'letsEncrypt'."
   type        = string
   default     = "letsEncrypt"
+}
+
+variable "suse_observability_enabled" {
+  description = "Specifies whether SUSE Observability should be installed on the Kubernetes cluster. Default is 'false'."
+  type        = bool
+  default     = false
+}
+
+variable "suse_observability_version" {
+  description = "Specifies the SUSE Observability Helm chart version to install. Default is null (latest version). Default is 'null'."
+  type        = string
+  default     = null
+}
+
+variable "suse_observability_license" {
+  description = "Specifies the SUSE Observability license key required for installation. Default is 'null'."
+  type        = string
+  default     = null
+  sensitive   = true
+  validation {
+    condition = (
+      var.suse_observability_enabled == false ||
+      (
+        var.suse_observability_license != null &&
+        length(var.suse_observability_license) > 0
+      )
+    )
+    error_message = "When suse_observability_enabled is true, suse_observability_license must be specified."
+  }
+}
+
+variable "suse_observability_admin_password" {
+  description = "Specifies the SUSE Observability administrator password used during installation. Must be at least 12 characters when enabled. Default is 'null'."
+  type        = string
+  default     = null
+  sensitive   = true
+  validation {
+    condition = (
+      var.suse_observability_enabled == false ||
+      (
+        var.suse_observability_admin_password != null &&
+        length(var.suse_observability_admin_password) >= 12
+      )
+    )
+    error_message = "When enabled is true, suse_observability_admin_password must be specified and contain at least 12 characters."
+  }
 }
