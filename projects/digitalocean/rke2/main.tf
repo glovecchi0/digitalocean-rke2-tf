@@ -138,6 +138,7 @@ module "longhorn" {
     flatten([for m in module.rke2_servers : m.instances_public_ip]),
     flatten([for m in module.rke2_workers : m.instances_public_ip])
   )
+  kubeconfig_path = local_file.kubeconfig_yaml.filename
 }
 
 module "rancher" {

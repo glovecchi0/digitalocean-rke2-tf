@@ -28,7 +28,8 @@ resource "helm_release" "longhorn" {
   create_namespace = true
   version          = var.longhorn_version
   depends_on = [
-    null_resource.longhorn_dependencies
+    null_resource.longhorn_dependencies,
+    null_resource.longhorn_tls_secret
   ]
   values = [
     <<EOF
@@ -39,10 +40,11 @@ defaultSettings:
 ingress:
   enabled: true
   ingressClassName: traefik
+
   host: ${var.longhorn_host}
+
   tls: true
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-lab
+  tlsSecret: longhorn-tls
 EOF
   ]
 }

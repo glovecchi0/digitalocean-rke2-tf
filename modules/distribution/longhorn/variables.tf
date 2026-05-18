@@ -33,3 +33,9 @@ variable "longhorn_version" {
   type        = string
   default     = null
 }
+
+variable "kubeconfig_path" {
+  description = "Path to kubeconfig file used by kubectl. Default is null."
+  type        = string
+  default     = null
+}
